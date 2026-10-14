@@ -76,6 +76,7 @@ workflow {
         params.skip_intervallisttools,
         params.skip_multiqc,
         params.skip_variantfiltration,
+        
     )
 
     // SUBWORKFLOW: Run initialisation tasks
@@ -144,6 +145,24 @@ workflow {
         vep_extra_files.add(file(params.spliceai_indel_tbi, checkIfExists: true))
         vep_extra_files.add(file(params.spliceai_snv, checkIfExists: true))
         vep_extra_files.add(file(params.spliceai_snv_tbi, checkIfExists: true))
+    }
+    
+    // ClinVar custom annotation files
+    if (params.clinvar_vcf && params.clinvar_tbi) {
+        vep_extra_files.add(file(params.clinvar_vcf, checkIfExists: true))
+        vep_extra_files.add(file(params.clinvar_tbi, checkIfExists: true))
+    }
+    else if (params.clinvar_vcf && !params.clinvar_tbi) {
+         error("ClinVar VCF was provided, but its index file is missing.")
+    }
+    
+    // COSMIC custom annotation
+    if (params.cosmic_vcf && params.cosmic_tbi) {
+        vep_extra_files.add(file(params.cosmic_vcf, checkIfExists: true))
+        vep_extra_files.add(file(params.cosmic_tbi, checkIfExists: true))
+    }
+    else if (params.cosmic_vcf || params.cosmic_tbi) {
+        error("COSMIC requires both VCF and index files.")
     }
 
     // WORKFLOW: Run main workflow
@@ -298,6 +317,7 @@ workflow NFCORE_RNAVAR {
         params.aligner,
         params.star_ignore_sjdbgtf,
         tools,
+      
     )
 }
 

@@ -407,6 +407,38 @@
                     "description": "Path to spliceai raw scores indel tabix indexed file.",
                     "help_text": "To be used with `--vep_spliceai`."
                 },
+                "clinvar_vcf": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^\\S+\\.vcf\\.gz$",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to the ClinVar GRCh38 VCF file for VEP custom annotation."
+               },
+               "clinvar_tbi": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^\\S+\\.tbi$",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to the ClinVar VCF tabix index."
+               },
+               "cosmic_vcf": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^\\S+\\.vcf\\.gz$",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to the COSMIC GRCh38 VCF file for VEP custom annotation."
+               },
+               "cosmic_tbi": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "pattern": "^\\S+\\.tbi$",
+                    "fa_icon": "fas fa-file",
+                    "description": "Path to the COSMIC VCF tabix index."
+                },
                 "vep_spliceregion": {
                     "type": "boolean",
                     "fa_icon": "fas fa-database",
